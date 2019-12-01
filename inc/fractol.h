@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:12:13 by abenani           #+#    #+#             */
-/*   Updated: 2019/11/28 16:21:17 by abenani          ###   ########.fr       */
+/*   Updated: 2019/12/01 11:00:11 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "mlx.h"
 # include <stdio.h>
 # include <math.h>
+# define width 600
+# define height 600
 
 typedef struct  s_ptr
 {
@@ -35,6 +37,13 @@ typedef struct  s_msg
 {
     t_ptr       ptr;
     t_img       img;
+    int         x;
+    int         y;
+    double      zoom;
+    int         it;
+    int         mvx;
+    int         mvy;
 }               t_msg;
+
 
 #endif
