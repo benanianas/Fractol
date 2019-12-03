@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:55:08 by abenani           #+#    #+#             */
-/*   Updated: 2019/12/01 19:35:53 by abenani          ###   ########.fr       */
+/*   Updated: 2019/12/03 15:33:52 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void draw(int *tab , t_msg msg)
        x = 0;
        while (x < 600)
        {
-           cr = ((x+msg.mvx) * thex + x1) / msg.zoom;
-           ci = ((y+msg.mvy) * they + y1) / msg.zoom;
+           cr = ((x+msg.mvx) * thex + x1) / msg.zoom - msg.zmvx;
+           ci = ((y+msg.mvy) * they + y1) / msg.zoom - msg.zmvy;
+           
            zr = 0;
            zi = 0;
            i = 0;
@@ -46,7 +47,6 @@ void draw(int *tab , t_msg msg)
        }
        y++;
    }
-
 }
 
 void    erase_img(int *tab)
@@ -93,17 +93,36 @@ int         mouse_press(int code, int x, int y, void *param)
     t_msg *msg;
    
     msg = (t_msg*)param;
-    x = y - code;
-
-    if (code == 5 && msg->zoom != 1)
+    double x1= -2.1,x2=0.6, y1= -1.2, y2 = 1.2;
+   double thex = (x2 - x1) / 600;
+   double they = (y2 - y1) / 600;
+   double nx,ny,cx,cy,xx,yy;
+    if (code == 5)
     {
-        msg->zoom -= 0.1;
+        cx = (x * thex + x1) / msg->zoom;
+       cy = (y * they + y1) / msg->zoom;
+       msg->zoom -= 0.1;
+       nx = (x * thex + x1) / msg->zoom;
+       ny = (y * they + y1) / msg->zoom;
+       xx = nx - cx;
+       yy = ny - cy;
+       msg->zmvx += xx;
+       msg->zmvy += yy;
+      
         
     }
     if(code == 4)
     {
-        msg->zoom += 0.1;
-
+       cx = (x * thex + x1) / msg->zoom;
+       cy = (y * they + y1) / msg->zoom;
+       msg->zoom += 0.1;
+       nx = (x * thex + x1) / msg->zoom;
+       ny = (y * they + y1) / msg->zoom;
+       xx = nx - cx;
+       yy = ny - cy;
+       msg->zmvx += xx;
+       msg->zmvy += yy;
+      
     }
     erase_img(msg->img.data);
     draw(msg->img.data, *msg);
@@ -120,7 +139,10 @@ int main()
     msg->zoom = 1;
     msg->it = 50;
     msg->mvx = 0;
-    msg->mvy = 0;
+    msg->
+    mvy = 0;
+    msg->zmvx = 0;
+    msg->zmvy = 0;
 
     ptr.mlx = mlx_init();
     ptr.win = mlx_new_window(ptr.mlx, 600, 600, "Fractol");

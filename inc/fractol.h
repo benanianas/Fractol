@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:12:13 by abenani           #+#    #+#             */
-/*   Updated: 2019/12/01 11:00:11 by abenani          ###   ########.fr       */
+/*   Updated: 2019/12/03 10:38:25 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct  s_msg
     int         it;
     int         mvx;
     int         mvy;
+    double      zmvx;
+    double      zmvy;
 }               t_msg;
 
 
