@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:12:13 by abenani           #+#    #+#             */
-/*   Updated: 2019/12/03 10:38:25 by abenani          ###   ########.fr       */
+/*   Updated: 2019/12/04 11:55:39 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_img
     void        *ptr;
     int         *data;
 }               t_img;
-typedef struct  s_msg
+typedef struct  s_event
 {
     t_ptr       ptr;
     t_img       img;
@@ -41,11 +41,21 @@ typedef struct  s_msg
     int         y;
     double      zoom;
     int         it;
-    int         mvx;
-    int         mvy;
-    double      zmvx;
-    double      zmvy;
-}               t_msg;
+    double      mvx;
+    double      mvy;
+}               t_event;
+typedef struct  s_zoom
+{
+    double      cx;
+    double      cy;
+    double      nx;
+    double      ny;
+}               t_zoom;
 
+void            draw(int *tab , t_event event);
+void            erase_img(int *tab);
+int             key_press(int keycode, void *param);
+int             mouse_press(int code, int x, int y, void *param);
+void            erase_img(int *tab);
 
 #endif
