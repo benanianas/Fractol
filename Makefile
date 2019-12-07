@@ -6,12 +6,12 @@
 #    By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/22 14:53:22 by abenani           #+#    #+#              #
-#    Updated: 2019/12/04 11:07:31 by abenani          ###   ########.fr        #
+#    Updated: 2019/12/07 15:58:47 by abenani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
-FILES = main.c events.c tools.c
+FILES = main.c events.c events_2.c tools.c tools_2.c mandelbrot.c julia.c burning_ship.c sets.c multibrot1.c multibrot2.c 
 DIR = srcs
 SLIB = libft/libft.a
 CC = gcc -Wall -Wextra -Werror
