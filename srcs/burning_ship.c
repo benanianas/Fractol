@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 19:45:10 by abenani           #+#    #+#             */
-/*   Updated: 2019/12/07 16:16:29 by abenani          ###   ########.fr       */
+/*   Updated: 2019/12/07 16:55:10 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@ void	burning_ship_core(t_dep *dep, t_set var)
 	var.x = 0;
 	while (var.x < 600)
 	{
-		var.cr = (double)(var.x + dep->event.trx) / (dep->event.zoom) + dep->event.mvx;
-		var.ci = (double)(var.y + dep->event.try) / (dep->event.zoom) + dep->event.mvy;
+		var.cr = (double)(var.x + dep->event.trx) / (dep->event.zoom)
+			+ dep->event.mvx;
+		var.ci = (double)(var.y + dep->event.try) / (dep->event.zoom)
+			+ dep->event.mvy;
 		var.zr = 0;
 		var.zi = 0;
 		var.i = 0;
-		while (var.zr*var.zr+var.zi*var.zi < 4 && var.i < dep->event.it)
+		while (var.zr * var.zr + var.zi * var.zi < 4 && var.i < dep->event.it)
 		{
 			var.tmp = var.zr;
-			var.zr = fabs(var.zr*var.zr - var.zi*var.zi + var.cr);
+			var.zr = fabs(var.zr * var.zr - var.zi * var.zi + var.cr);
 			var.zi = fabs(2 * var.zi * var.tmp + var.ci);
 			var.i++;
 		}
 		if (var.i < dep->event.it)
-			dep->tab[var.x+var.y*600] = dep->event.c * var.i;
+			dep->tab[var.x + var.y * 600] = dep->event.c * var.i;
 		var.x++;
 	}
 }
+
 void	*burning_ship_part1(void *param)
 {
 	t_dep *dep;
@@ -48,6 +51,7 @@ void	*burning_ship_part1(void *param)
 	}
 	return (NULL);
 }
+
 void	*burning_ship_part2(void *param)
 {
 	t_dep *dep;
@@ -62,6 +66,7 @@ void	*burning_ship_part2(void *param)
 	}
 	return (NULL);
 }
+
 void	*burning_ship_part3(void *param)
 {
 	t_dep *dep;
@@ -76,6 +81,7 @@ void	*burning_ship_part3(void *param)
 	}
 	return (NULL);
 }
+
 void	*burning_ship_part4(void *param)
 {
 	t_dep *dep;

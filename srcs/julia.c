@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 18:54:43 by abenani           #+#    #+#             */
-/*   Updated: 2019/12/07 16:16:42 by abenani          ###   ########.fr       */
+/*   Updated: 2019/12/07 17:16:50 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	julia_core(t_dep *dep, t_set var)
 {
-	static double cr,ci;
+	static double cr;
+	static double ci;
 
 	var.x = -1;
 	while (var.x++ < HEIGHT)
 	{
-		var.zr = (double)(var.x + dep->event.trx)/ (dep->event.zoom)
+		var.zr = (double)(var.x + dep->event.trx) / (dep->event.zoom)
 			+ dep->event.mvx;
-		var.zi = (double)(var.y + dep->event.try)/ (dep->event.zoom)
+		var.zi = (double)(var.y + dep->event.try) / (dep->event.zoom)
 			+ dep->event.mvy;
 		if (dep->event.lock == 0)
 		{
@@ -29,17 +30,17 @@ void	julia_core(t_dep *dep, t_set var)
 			ci = dep->event.y / (dep->event.zoom) + dep->event.mvy;
 		}
 		var.i = 0;
-		while (var.zr*var.zr+var.zi*var.zi < 4 && var.i < dep->event.it)
+		while (var.zr * var.zr + var.zi * var.zi < 4 && var.i++ < dep->event.it)
 		{
 			var.tmp = var.zr;
-			var.zr = var.zr*var.zr - var.zi*var.zi + cr;
+			var.zr = var.zr * var.zr - var.zi * var.zi + cr;
 			var.zi = 2 * var.zi * var.tmp + ci;
-			var.i++;
 		}
 		if (var.i < dep->event.it)
-			dep->tab[var.x+var.y*600] = dep->event.c * var.i;
+			dep->tab[var.x + var.y * 600] = dep->event.c * var.i;
 	}
 }
+
 void	*julia_part1(void *param)
 {
 	t_dep *dep;
@@ -54,6 +55,7 @@ void	*julia_part1(void *param)
 	}
 	return (NULL);
 }
+
 void	*julia_part2(void *param)
 {
 	t_dep *dep;
@@ -68,6 +70,7 @@ void	*julia_part2(void *param)
 	}
 	return (NULL);
 }
+
 void	*julia_part3(void *param)
 {
 	t_dep *dep;
@@ -82,6 +85,7 @@ void	*julia_part3(void *param)
 	}
 	return (NULL);
 }
+
 void	*julia_part4(void *param)
 {
 	t_dep *dep;
@@ -96,4 +100,3 @@ void	*julia_part4(void *param)
 	}
 	return (NULL);
 }
-

@@ -6,7 +6,7 @@
 /*   By: abenani <abenani@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 21:55:50 by abenani           #+#    #+#             */
-/*   Updated: 2019/12/07 16:16:52 by abenani          ###   ########.fr       */
+/*   Updated: 2019/12/07 16:57:42 by abenani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,28 @@ void	multibrot1_core(t_dep *dep, t_set var)
 	var.x = 0;
 	while (var.x < 600)
 	{
-		var.cr = (double)(var.x  + dep->event.trx) / (dep->event.zoom) + dep->event.mvx;
-		var.ci = (double)(var.y  + dep->event.try) / (dep->event.zoom) + dep->event.mvy;
+		var.cr = (double)(var.x + dep->event.trx) / (dep->event.zoom)
+			+ dep->event.mvx;
+		var.ci = (double)(var.y + dep->event.try) / (dep->event.zoom)
+			+ dep->event.mvy;
 		var.zr = var.cr;
 		var.zi = var.ci;
 		var.i = 0;
-		while (var.zr*var.zr+var.zi*var.zi < 4 && var.i < dep->event.it)
+		while (var.zr * var.zr + var.zi * var.zi < 4 && var.i < dep->event.it)
 		{
 			var.tmp = var.zr;
-			var.zr = var.zr*var.zr*var.zr - 3 * var.zr * var.zi*var.zi + var.cr;
-			var.zi = 3 * var.tmp*var.tmp*var.zi - var.zi*var.zi*var.zi + var.ci;
+			var.zr = var.zr * var.zr * var.zr -
+				3 * var.zr * var.zi * var.zi + var.cr;
+			var.zi = 3 * var.tmp * var.tmp * var.zi -
+				var.zi * var.zi * var.zi + var.ci;
 			var.i++;
 		}
 		if (var.i < dep->event.it)
-			dep->tab[var.x + var.y*600] = dep->event.c * var.i;
+			dep->tab[var.x + var.y * 600] = dep->event.c * var.i;
 		var.x++;
 	}
 }
+
 void	*multibrot1_part1(void *param)
 {
 	t_dep *dep;
@@ -48,6 +53,7 @@ void	*multibrot1_part1(void *param)
 	}
 	return (NULL);
 }
+
 void	*multibrot1_part2(void *param)
 {
 	t_dep *dep;
@@ -62,6 +68,7 @@ void	*multibrot1_part2(void *param)
 	}
 	return (NULL);
 }
+
 void	*multibrot1_part3(void *param)
 {
 	t_dep *dep;
@@ -76,6 +83,7 @@ void	*multibrot1_part3(void *param)
 	}
 	return (NULL);
 }
+
 void	*multibrot1_part4(void *param)
 {
 	t_dep *dep;
